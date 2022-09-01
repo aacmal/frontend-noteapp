@@ -1,0 +1,21 @@
+.note-lists{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr) );
+    gap: 15px;
+}
+
+.section-header{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.section-header h1{
+    color: #9f9f9f;
+}
+
+.not-found{
+    margin-left: 50px;
+    font-size: 1.3rem;
+    color: #9f9f9f;
+}
