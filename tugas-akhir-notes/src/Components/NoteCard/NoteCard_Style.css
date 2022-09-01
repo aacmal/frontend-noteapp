@@ -1,0 +1,52 @@
+.note-card{
+    background: #353438;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid transparent;
+    transition: border .3s;
+}
+
+.note-card:hover{
+    border: 1px solid rgb(211, 211, 211);
+}
+
+.note-card h1{
+    color: #DFE2EA;
+    width: fit-content;
+    display: inline;
+}
+
+.note-card .note-card-date{
+    color: #868b97;
+}
+
+.note-card .note-card-body{
+    color: #DFE2EA;
+}
+
+.action{
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
+    margin-top: auto;
+}
+
+.button-action{
+    background-color: transparent;
+    width: 35px;
+    padding: 5px;
+    border-radius: 5px;
+    color: #DFE2EA;
+    outline: none;
+    border: none;
+    transition: all .1s;
+    cursor: pointer;
+}
+
+.button-action:hover{
+    background-color: #67696d;
+}
+
