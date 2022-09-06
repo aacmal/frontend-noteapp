@@ -4,10 +4,10 @@ import List from '../Icons/List'
 
 const SectionHeader = ({ isArchive }) => {
   return (
-    <secion className='section-header'>
+    <section className='section-header'>
         {
             !isArchive
-            ? <>
+            ? <>  
                 <List/>
                 <h1>Notes</h1>
             </>
@@ -16,7 +16,7 @@ const SectionHeader = ({ isArchive }) => {
                 <h1>Archive</h1>
             </>
         }
-    </secion>
+    </section>
   )
 }
 

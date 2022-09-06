@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NoteInput from './Components/NoteInput/NoteInput'
 import NoteLists from './Components/NoteLists/NoteLists'
 import SearchInput from './Components/SearchInput/SearchInput'
+import useLocalStorage from './hooks/useLocalStorage'
 
 import './style.css'
 import { getInitialData } from './utils'
@@ -9,91 +10,88 @@ import { getInitialData } from './utils'
 const date = new Date()
 
 
-class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      allNotes: getInitialData(),
-      searchKeyword: ''
-    }
+function App(){
+  const [notes, setNotes] = useLocalStorage('notes', getInitialData())
+  const [keyword, setKeyword] = useState('')
 
-    this.handleAddContact = this.handleAddContact.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
-    this.handleArchive = this.handleArchive.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
-  }
-
-
-  handleAddContact(data){
+  function handleAddContact(data){
     const {title, body} = data
-    this.setState((prevState) => {
-        return {
-            allNotes: [
-                ...prevState.allNotes,
-                {
-                    id: +new Date(),
-                    title: title,
-                    body: body,
-                    createdAt: date.toISOString(),
-                    archived: false
-                }
-            ]
+    setNotes((prevNotes) => {
+      return [
+        ...prevNotes,
+        {
+          id: +new Date(),
+          title: title,
+          body: body,
+          createdAt: date.toISOString(),
+          archived: false
         }
+      ]
     })
+    // this.setState((prevState) => {
+    //     return {
+    //         allNotes: [
+    //             ...prevState.allNotes,
+    //             {
+    //                 id: +new Date(),
+    //                 title: title,
+    //                 body: body,
+    //                 createdAt: date.toISOString(),
+    //                 archived: false
+    //             }
+    //         ]
+    //     }
+    // })
   }
 
-  handleDelete(id){
+  function handleDelete(id){
     console.log(id);
-    const notes = this.state.allNotes.filter(note => note.id !== id)
-    this.setState({allNotes: notes})
+    const filteredNotes = notes.filter(note => note.id !== id)
+    setNotes(() => filteredNotes)
+    // this.setState({allNotes: notes})
   }
 
-  handleArchive(id){
-    const newNote = this.state.allNotes
+  function handleArchive(id){
+    const newNote = notes
     const index = newNote.findIndex(note => note.id == id)
     newNote[index].archived = !newNote[index].archived
 
-    this.setState({
-      allNotes: newNote
-    })
+    setNotes(() => [...newNote])
+
+    // this.setState({
+    //   allNotes: newNote
+    // })
 
   }
 
-  handleSearch(e){
-    this.setState({
-      searchKeyword: e.target.value
-    })
-  }
+  const searchResult = notes.filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()))
+  const notesData = keyword.length > 0 ? searchResult : notes
+  const archived = notesData.filter(note => note.archived === true)
+  const notArchived = notesData.filter(note => note.archived !== true)
 
-  render(){
-    const searchResult = this.state.allNotes.filter(note => note.title.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))
-    const notesData = this.state.searchKeyword.length > 0 ? searchResult : this.state.allNotes
-    const archived = notesData.filter(note => note.archived === true)
-    const notArchived = notesData.filter(note => note.archived !== true)
-    return (
-      <>
-        <header>
-          <h1>Note App</h1>
-        </header>
-        <main className='container'>
-          <NoteInput addNote={this.handleAddContact}/>
-          <SearchInput onChange={this.handleSearch}/>
-          <NoteLists 
-            noteLists={notArchived}
-            onDelete={this.handleDelete}
-            setArchive={this.handleArchive}
-          />
-          <hr />
-          <NoteLists 
-            isArchive={true} 
-            noteLists={archived}
-            onDelete={this.handleDelete}
-            setArchive={this.handleArchive}
-          />
-        </main>
-      </>
-    )
-  }
+  return (
+    <>
+      <header>
+        <h1>Note App</h1>
+      </header>
+      <main className='container'>
+        <NoteInput addNote={handleAddContact}/>
+        <SearchInput onChange={(e) => setKeyword(e.target.value)}/>
+        <NoteLists 
+          noteLists={notArchived}
+          onDelete={handleDelete}
+          setArchive={handleArchive}
+        />
+        <hr />
+        <NoteLists 
+          isArchive={true} 
+          noteLists={archived}
+          onDelete={handleDelete}
+          setArchive={handleArchive}
+        />
+      </main>
+    </>
+  )
 }
 
 export default App
