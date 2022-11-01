@@ -15,11 +15,11 @@ const NoteLists = ({ noteLists, onDelete, isArchive, setArchive }) => {
                     noteLists.length > 0 
                     ? noteLists.map(note => (
                         <NoteCard
-                            key={note.id}
-                            id={note.id}
+                            key={note._id}
+                            id={note._id}
                             title={note.title}
                             body={note.body}
-                            archived={note.archived}
+                            archived={note.isArchived}
                             createdAt={note.createdAt}
                             onDelete={onDelete}
                             setArchive={setArchive}

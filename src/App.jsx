@@ -7,7 +7,7 @@ import useLocalStorage from './hooks/useLocalStorage'
 
 import './style.css'
 import { getInitialData } from './utils'
-import { BASE_URL, getAllNotes } from './utils/api'
+import { BASE_URL } from './utils/api'
 
 const date = new Date()
 
@@ -18,6 +18,10 @@ const App = () => {
   const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
+    getAllNotes()
+  }, [])
+
+  function getAllNotes(){
     axios.get(BASE_URL)
     .then(res => {
       console.log(res);
@@ -27,36 +31,41 @@ const App = () => {
     .catch(err => {
       console.log(err)
     })
-  }, [])
+  }
 
   function handleAddContact(data){
-    const {title, body} = data
-    setNotes((prevNotes) => {
-      return [
-        ...prevNotes,
-        {
-          id: +new Date(),
-          title: title,
-          body: body,
-          createdAt: date.toISOString(),
-          archived: false
-        }
-      ]
+    console.log(data);
+    axios.post(BASE_URL, data)
+    .then((res) => {
+      console.log(res);
+      getAllNotes()
     })
+    .catch((err) => console.log(err))
   }
 
   function handleDelete(id){
-    console.log(id);
-    const filteredNotes = notes.filter(note => note.id !== id)
-    setNotes(() => filteredNotes)
+    axios.delete(`${BASE_URL}/${id}`)
+    .then((res) => {
+      console.log(res);
+      getAllNotes()
+    })
+    .catch((err) => console.log(err))
   }
 
   function handleArchive(id){
-    const newNote = notes
-    const index = newNote.findIndex(note => note.id == id)
-    newNote[index].archived = !newNote[index].archived
+    const index = notes.findIndex(note => note._id == id)
+    const updatedNote = {
+      ...notes[index],
+      isArchived: !notes[index].isArchived
+    }
+    console.log(index);
 
-    setNotes(() => [...newNote])
+    axios.put(`${BASE_URL}/${id}`, updatedNote)
+    .then((res) => {
+      console.log(res);
+      getAllNotes()
+    })
+    .catch((err) => console.log(err))
 
   }
 
