@@ -12,7 +12,8 @@ const LoginModal = () => {
     const email = emailRef.current.value
     const password = passwordRef.current.value
     console.log(email, password);
-    axios.post(`http://localhost:3001/auth/login`, {email: email, password: password})
+    axios.post(`http://localhost:3001/auth/login`, {email: email, password: password}, {withCredentials: true})
+    .then((res) => console.log(res))
   }
 
   return (

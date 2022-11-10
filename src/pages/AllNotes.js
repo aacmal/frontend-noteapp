@@ -4,6 +4,7 @@ import NoteInput from '../Components/NoteInput/NoteInput';
 import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import { BASE_URL } from '../utils/api';
+import { getAllNotes } from '../utils/note';
 
 const AllNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -11,27 +12,33 @@ const AllNotes = () => {
   const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
-    getAllNotes()
+    renderNote()
   }, [])
 
-  function getAllNotes(){
-    axios.get(BASE_URL)
-    .then(res => {
+  function renderNote(){
+    getAllNotes()
+    .then((res) => {
       console.log(res);
       setNotes(res.data)
       setLoading(false)
     })
-    .catch(err => {
-      console.log(err)
-    })
+    // axios.get(BASE_URL, {withCredentials: true, headers: {'Content-Type': 'application/x-www-form-urlencoded'}},)
+    // .then(res => {
+    //   console.log(res);
+    //   setNotes(res.data)
+    //   setLoading(false)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
   }
 
-  function handleAddContact(data){
+  function handleAddNote(data){
     console.log(data);
-    axios.post(BASE_URL, data)
+    axios.post(BASE_URL, data, {withCredentials: true})
     .then((res) => {
       console.log(res);
-      getAllNotes()
+      renderNote()
     })
     .catch((err) => console.log(err))
   }
@@ -40,7 +47,7 @@ const AllNotes = () => {
     axios.delete(`${BASE_URL}/${id}`)
     .then((res) => {
       console.log(res);
-      getAllNotes()
+      renderNote()
     })
     .catch((err) => console.log(err))
   }
@@ -56,7 +63,7 @@ const AllNotes = () => {
     axios.put(`${BASE_URL}/${id}`, updatedNote)
     .then((res) => {
       console.log(res);
-      getAllNotes()
+      renderNote()
     })
     .catch((err) => console.log(err))
 
@@ -69,7 +76,7 @@ const AllNotes = () => {
 
   return (
     <main className='container'>
-      <NoteInput addNote={handleAddContact}/>
+      <NoteInput addNote={handleAddNote}/>
       <SearchInput onChange={(e) => setKeyword(e.target.value)}/>
     {
       loading
