@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 import { BrowserRouter, useLocation } from 'react-router-dom'
 import AllNotes from '../pages/AllNotes'
 import Navbar from '../Components/Navbar/Navbar'
-import AuthModal from '../Components/AuthModal/index'
+import AuthModal from '../Components/AuthModal/AuthModal'
 
 const MainRouter = () => {
   const location = useLocation();

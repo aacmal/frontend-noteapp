@@ -1,4 +1,4 @@
-.modal-wrapper{
+.modal-wrapper.background{
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -6,8 +6,13 @@
     left: 0;
     background: rgba(72, 72, 72, 0.268);
     backdrop-filter: blur(2px);
-    display: grid;
-    place-items: center;
+    display: relative;
+}
+
+.trigger{
+    background: transparent;
+    width: 100%;
+    height: 100%;
 }
 
 .auth-title{
@@ -16,6 +21,10 @@
 }
 
 .auth-modal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     padding: 30px;
     border-radius: 10px;
     background-color: rgb(96, 96, 96);
@@ -76,4 +85,8 @@
     width: 100%;
     display: block;
     text-align: center;
+}
+
+.auth-button{
+    cursor: pointer;
 }
