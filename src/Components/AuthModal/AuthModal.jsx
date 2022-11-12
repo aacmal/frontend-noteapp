@@ -1,15 +1,19 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion/dist/framer-motion'
-
-import LoginModal from './Login'
-
+import { UserContext } from '../../context/UserContext'
 
 import './AuthModal_style.css'
 
-
 const AuthModal = ({children}) => {
+  const {user} = useContext(UserContext);
+
   const navigate = useNavigate()
+  if(user){
+    return (
+      <Navigate to={'/'}/>
+    )
+  }
   return (
     <div className='modal-wrapper'>
       <motion.div 
