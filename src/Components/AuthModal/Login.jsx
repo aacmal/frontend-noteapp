@@ -38,7 +38,7 @@ const LoginModal = () => {
         <button className='auth-button' type='submit'>Login</button>
         <span className='auth-fallback'>
           <span>Don't have account?</span>{' '}
-          <Link className='link' state={{background: location}} to={'/h/register'}>Register</Link>
+          <Link className='link' state={{background: location}} to={'/register'}>Register</Link>
         </span>
       </form>
     </AuthModal>

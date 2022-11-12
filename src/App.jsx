@@ -11,6 +11,7 @@ import './style.css'
 import { getInitialData } from './utils'
 import { BASE_URL } from './utils/api'
 import { BrowserRouter } from 'react-router-dom'
+import Navbar from './Components/Navbar/Navbar'
 
 const date = new Date()
 
@@ -18,6 +19,7 @@ const date = new Date()
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar/>
       <MainRouter/>
     </BrowserRouter>
   )

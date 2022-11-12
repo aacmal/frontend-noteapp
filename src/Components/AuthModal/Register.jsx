@@ -37,7 +37,7 @@ const RegisterModal = () => {
         <button className='auth-button' type='submit'>Register</button>
         <span className='auth-fallback'>
           <span>Already have account?</span>{' '}
-          <Link className='link' state={{background: location}} to={'/h/login'}>Login</Link>
+          <Link className='link' state={{background: location}} to={'/login'}>Login</Link>
         </span>
       </form>
     </AuthModal>
