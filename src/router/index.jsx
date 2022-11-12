@@ -1,32 +1,38 @@
-import React from 'react'
-import { Route, Routes } from 'react-router'
+import React, { useEffect } from 'react'
+import { redirect, Route, Routes } from 'react-router'
 import { BrowserRouter, useLocation } from 'react-router-dom'
 import AllNotes from '../pages/AllNotes'
 import Navbar from '../Components/Navbar/Navbar'
-import AuthModal from '../Components/AuthModal/AuthModal'
+import {AnimatePresence} from 'framer-motion/dist/framer-motion'
+import LoginModal from '../Components/AuthModal/Login'
+import RegisterModal from '../Components/AuthModal/Register'
 
 const MainRouter = () => {
   const location = useLocation();
 
-  // The `backgroundLocation` state is the location that we were at when one of
-  // the gallery links was clicked. If it's there, use it as the location for
-  // the <Routes> so we show the gallery in the background, behind the modal.
+  
   const background = location.state && location.state.background;
   console.log(background);
   return (
     <>
+      <AnimatePresence>
       <Routes location={background || location}>
-        <Route path='/' element={<Navbar/>}>
-            <Route index element={<AllNotes/>}/>
+        <Route element={<Navbar/>}>
+            <Route path='h' element={<AllNotes/>}>
+              <Route path='login' element={<LoginModal/>}/>
+              <Route path='register' element={<RegisterModal/>}/>
+            </Route>
         </Route>
       </Routes> 
-      {
-        background ? (
-          <Routes>
-            <Route path='/login' element={<AuthModal/>}/>
-          </Routes>
-        ) : undefined
-      }
+        {
+          background && (
+            <Routes>
+              <Route path='/h/login' element={<LoginModal/>}/>
+              <Route path='/h/register' element={<RegisterModal/>}/>
+            </Routes>
+          )
+        }
+      </AnimatePresence>
     </>
   )
 }
