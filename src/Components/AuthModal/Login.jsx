@@ -35,7 +35,9 @@ const LoginModal = () => {
           label='Password'
           inputRef={passwordRef}
         />
-        <button className='auth-button' type='submit'>Login</button>
+        <button className='auth-button' type='submit'>
+          <span>Login</span>
+        </button>
         <span className='auth-fallback'>
           <span>Don't have account?</span>{' '}
           <Link className='link' state={{background: location}} to={'/register'}>Register</Link>

@@ -4,7 +4,7 @@ const InputWithLabel = ({type, label, inputRef}) => {
   return (
     <div className='input-group'>
         <label htmlFor={type}>{label}</label>
-        <input ref={inputRef} type={type} id={type} name={type}/>
+        <input required ref={inputRef} type={type} id={type} name={type}/>
     </div>
   )
 }
