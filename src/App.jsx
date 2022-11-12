@@ -12,15 +12,16 @@ import { getInitialData } from './utils'
 import { BASE_URL } from './utils/api'
 import { BrowserRouter } from 'react-router-dom'
 import Navbar from './Components/Navbar/Navbar'
-
-const date = new Date()
+import UserContextProvider from './context/UserContext.jsx'
 
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Navbar/>
-      <MainRouter/>
+      <UserContextProvider>
+        <Navbar/>
+        <MainRouter/>
+      </UserContextProvider>
     </BrowserRouter>
   )
   

@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import NoteInput from '../Components/NoteInput/NoteInput';
 import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
+import { UserContext } from '../context/UserContext';
 import { BASE_URL } from '../utils/api';
 import { getAllNotes } from '../utils/note';
 
@@ -10,11 +11,12 @@ const AllNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true)
   const [keyword, setKeyword] = useState('')
+  const {user} = useContext(UserContext);
 
   useEffect(() => {
     renderNote()
-  }, [])
-
+  }, [user])
+  
   function renderNote(){
     getAllNotes()
     .then((res) => {

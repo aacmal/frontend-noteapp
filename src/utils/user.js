@@ -15,3 +15,8 @@ export const logout = async () => {
     const data = await instance.get('/auth/logout')
     return data
 }
+
+export const getUserData = async () => {
+    const data = await instance.get('/user')
+    return data
+}

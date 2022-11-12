@@ -1,7 +1,8 @@
 import axios from 'axios'
 import classNames from 'classnames'
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext.jsx'
 import { BASE_URL } from '../../utils/api'
 import { register } from '../../utils/user'
 import Spinner from '../dls/Loading/Spinner'
@@ -15,6 +16,7 @@ const RegisterModal = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const navigate = useNavigate()
+  const {setUser} = useContext(UserContext);
 
   function handleSubmit(event) {
     setLoading(true)
@@ -30,6 +32,7 @@ const RegisterModal = () => {
     .then((res) => {
       console.log(res);
       setLoading(false)
+      setUser(res.data.data)
       setTimeout(() => {
         navigate('/');
       }, 1000)
