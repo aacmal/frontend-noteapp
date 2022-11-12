@@ -32,6 +32,12 @@ const NoteInput = ({ addNote }) => {
         }
         console.log(data);
         addNote(data)
+        inputBodyRef.current.value = '';
+        setState({
+            title: '',
+            body: '',
+            maxTitle: 61,
+        })
 
     }
     return (

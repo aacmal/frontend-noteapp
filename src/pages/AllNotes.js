@@ -5,7 +5,7 @@ import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import { UserContext } from '../context/UserContext';
 import { BASE_URL } from '../utils/api';
-import { getAllNotes } from '../utils/note';
+import { addNewNote, getAllNotes } from '../utils/note';
 
 const AllNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -37,7 +37,7 @@ const AllNotes = () => {
 
   function handleAddNote(data){
     console.log(data);
-    axios.post(BASE_URL, data, {withCredentials: true})
+    addNewNote(data)
     .then((res) => {
       console.log(res);
       renderNote()
