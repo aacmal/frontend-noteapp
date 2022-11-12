@@ -1,23 +1,37 @@
 import axios from 'axios'
-import React, { useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useContext, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext'
 import { BASE_URL } from '../../utils/api'
+import { login } from '../../utils/user'
 import AuthModal from './AuthModal'
 import InputWithLabel from './InputWithLabel'
+import SubmitButton from './SubmitButton'
 
 const LoginModal = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const location = useLocation();
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+  const { setUser } = useContext(UserContext);
 
 
   function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
     const email = emailRef.current.value
     const password = passwordRef.current.value
     console.log(email, password);
-    axios.post(`http://localhost:3001/auth/login`, {email: email, password: password}, {withCredentials: true})
-    .then((res) => console.log(res))
+    login(email, password)
+    .then((res) => {
+      console.log(res);
+      setLoading(false)
+      setUser(res.data)
+      setTimeout(() => {
+        navigate('/');
+      }, 1000)
+    })
   }
 
   return (
@@ -35,9 +49,10 @@ const LoginModal = () => {
           label='Password'
           inputRef={passwordRef}
         />
-        <button className='auth-button' type='submit'>
-          <span>Login</span>
-        </button>
+        <SubmitButton
+          loading={loading}
+          label='Login'
+        />
         <span className='auth-fallback'>
           <span>Don't have account?</span>{' '}
           <Link className='link' state={{background: location}} to={'/register'}>Register</Link>
