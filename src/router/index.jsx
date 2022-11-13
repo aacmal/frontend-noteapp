@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, useLocation, Route, Routes } from 'react-router-dom'
-import AllNotes from '../pages/AllNotes'
 import Navbar from '../Components/Navbar/Navbar'
 import {AnimatePresence} from 'framer-motion/dist/framer-motion'
 import LoginModal from '../Components/AuthModal/Login'
 import RegisterModal from '../Components/AuthModal/Register'
+import AllNotes from '../pages/AllNotes.jsx'
 
 const MainRouter = () => {
   const location = useLocation();

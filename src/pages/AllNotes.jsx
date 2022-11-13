@@ -24,15 +24,10 @@ const AllNotes = () => {
       setNotes(res.data)
       setLoading(false)
     })
-    // axios.get(BASE_URL, {withCredentials: true, headers: {'Content-Type': 'application/x-www-form-urlencoded'}},)
-    // .then(res => {
-    //   console.log(res);
-    //   setNotes(res.data)
-    //   setLoading(false)
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    // })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false)
+    })
   }
 
   function handleAddNote(data){
@@ -42,7 +37,9 @@ const AllNotes = () => {
       console.log(res);
       renderNote()
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      console.log(err);
+    })
   }
 
   function handleDelete(id){
@@ -83,20 +80,24 @@ const AllNotes = () => {
     {
       loading
         ? <h1>Loading ...</h1>
-        : <> 
-            <NoteLists 
-              noteLists={notArchived}
-              onDelete={handleDelete}
-              setArchive={handleArchive}
-            />
-            <hr />
-            <NoteLists
-              isArchive={true} 
-              noteLists={archived}
-              onDelete={handleDelete}
-              setArchive={handleArchive}
-            />
-          </>
+        : user
+          ? (
+            <> 
+              <NoteLists 
+                noteLists={notArchived}
+                onDelete={handleDelete}
+                setArchive={handleArchive}
+              />
+              <hr />
+              <NoteLists
+                isArchive={true} 
+                noteLists={archived}
+                onDelete={handleDelete}
+                setArchive={handleArchive}
+              />
+            </>
+          )
+          : <h2 className='auth-description'>Please Login or create new account</h2> 
       }
     </main>
   )

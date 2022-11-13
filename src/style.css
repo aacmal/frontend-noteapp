@@ -41,6 +41,11 @@ hr{
     color: #9f9f9f;
 }
 
+.auth-description{
+    text-align: center;
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 600px) {
     .container{
         padding: 0 15px;
