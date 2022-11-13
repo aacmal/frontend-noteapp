@@ -1,0 +1,41 @@
+.user{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.chevron{
+    transition: all 0.2s ease;
+}
+
+.user:hover .chevron{
+    transform: rotate(180deg);
+}
+
+.user .user-dropdown{
+    width: 100%;
+    top: 30px;
+    border-radius: 10px;
+    position: absolute;
+    padding: 10px 15px;
+    background-color: #424145;
+    transition: all 0.2s ease;
+    visibility: hidden;
+    transition-delay: .8s;
+    opacity: 0;
+    z-index: 100;
+}
+
+.user:hover .user-dropdown{
+    top: 50px;
+    transition-delay: .2s;
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+
+.user-dropdown:hover{
+    background-color: #67696d;
+}

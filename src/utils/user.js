@@ -12,7 +12,7 @@ export const register = async (email, password) => {
 }
 
 export const logout = async () => {
-    const data = await instance.get('/auth/logout')
+    const data = await instance.delete('/auth/logout')
     return data
 }
 
