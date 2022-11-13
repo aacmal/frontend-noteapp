@@ -35,8 +35,8 @@ const AllNotes = () => {
     addNewNote(data)
     .then((res) => {
       console.log(res);
-      toast('Note added successfully')
       renderNote()
+      toast('Note added successfully')
     })
     .catch((err) => {
       console.log(err);
@@ -47,8 +47,8 @@ const AllNotes = () => {
     deleteNote(id)
     .then((res) => {
       console.log(res);
-      toast('Note deleted successfully')
       renderNote()
+      toast('Note deleted successfully')
     })
     .catch((err) => console.log(err))
   }
@@ -64,12 +64,12 @@ const AllNotes = () => {
     moveNote(id, updatedNote)
     .then((res) => {
       console.log(res);
+      renderNote()
       if(updatedNote.isArchived){
         toast('Note archived successfully')
       } else {
         toast('Note unarchived successfully')
       }
-      renderNote()
     })
     .catch((err) => console.log(err))
 
