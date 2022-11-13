@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 import NoteInput from '../Components/NoteInput/NoteInput';
 import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import { UserContext } from '../context/UserContext';
 import { BASE_URL } from '../utils/api';
-import { addNewNote, getAllNotes } from '../utils/note';
+import { addNewNote, deleteNote, getAllNotes, moveNote } from '../utils/note';
 
 const AllNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -31,10 +32,10 @@ const AllNotes = () => {
   }
 
   function handleAddNote(data){
-    console.log(data);
     addNewNote(data)
     .then((res) => {
       console.log(res);
+      toast('Note added successfully')
       renderNote()
     })
     .catch((err) => {
@@ -43,9 +44,10 @@ const AllNotes = () => {
   }
 
   function handleDelete(id){
-    axios.delete(`${BASE_URL}/${id}`)
+    deleteNote(id)
     .then((res) => {
       console.log(res);
+      toast('Note deleted successfully')
       renderNote()
     })
     .catch((err) => console.log(err))
@@ -59,9 +61,14 @@ const AllNotes = () => {
     }
     console.log(index);
 
-    axios.put(`${BASE_URL}/${id}`, updatedNote)
+    moveNote(id, updatedNote)
     .then((res) => {
       console.log(res);
+      if(updatedNote.isArchived){
+        toast('Note archived successfully')
+      } else {
+        toast('Note unarchived successfully')
+      }
       renderNote()
     })
     .catch((err) => console.log(err))
