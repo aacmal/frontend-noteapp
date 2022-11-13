@@ -18,17 +18,13 @@ const RegisterModal = () => {
   const passwordRef = useRef()
   const navigate = useNavigate()
   const {setUser} = useContext(UserContext);
+  const [error, setError] = useState(null);
 
   function handleSubmit(event) {
     setLoading(true)
     event.preventDefault();
     const email = emailRef.current.value
     const password = passwordRef.current.value
-    console.log(email, password);
-    // axios.post(`http://localhost:3001/auth/register`, {email: email, password: password}, {withCredentials: true})
-    // .then((res) => console.log(res))
-    // Register user
-    console.log('Registering user');
     register(email, password)
     .then((res) => {
       console.log(res);
@@ -39,12 +35,17 @@ const RegisterModal = () => {
         navigate('/');
       }, 1000)
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      console.log(err);
+      setError(err.response.data.message)
+      setLoading(false)
+    })
   }
 
   return (
     <AuthModal>
       <h1 className='auth-title'>Register</h1>
+      {error && <p className='error'>{error}</p>}
       <form action="" onSubmit={handleSubmit}>
         <InputWithLabel
           type='email'

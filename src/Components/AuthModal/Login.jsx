@@ -12,6 +12,7 @@ import { ToastContainer, toast } from 'react-toastify'
 const LoginModal = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
+  const [error, setError] = useState(null);
   const location = useLocation();
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -23,7 +24,6 @@ const LoginModal = () => {
     event.preventDefault();
     const email = emailRef.current.value
     const password = passwordRef.current.value
-    console.log(email, password);
     login(email, password)
     .then((res) => {
       console.log(res);
@@ -34,11 +34,17 @@ const LoginModal = () => {
         navigate('/');
       }, 1000)
     })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false)
+      setError('Invalid email or password')
+    })
   }
 
   return (
     <AuthModal>
       <h1 className='auth-title'>Login</h1>
+      {error && <p className='error'>{error}</p>}
       <form action="" onSubmit={handleSubmit}>
         <InputWithLabel
           type='email'

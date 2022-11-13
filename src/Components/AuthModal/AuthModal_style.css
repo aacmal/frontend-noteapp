@@ -75,3 +75,12 @@
     display: block;
     text-align: center;
 }
+
+.error{
+    color: rgb(253, 51, 51);
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
