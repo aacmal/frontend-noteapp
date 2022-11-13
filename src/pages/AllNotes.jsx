@@ -14,7 +14,7 @@ const AllNotes = () => {
 
   useEffect(() => {
     if(user){
-      renderNote(toast('Note Updated', {autoClose: 800}))
+      renderNote(() => toast('Note Updated', {autoClose: 800}))
     }
   }, [user])
   
@@ -24,9 +24,7 @@ const AllNotes = () => {
       console.log(res);
       setNotes(res.data)
       setLoading(false)
-      if(typeof callback === 'function'){
-        callback();
-      }
+      callback();
     })
     .catch((err) => {
       console.log(err);
@@ -49,7 +47,7 @@ const AllNotes = () => {
     .then(async (res) => {
       console.log(res);
       renderNote(
-        toastUpdate(toastIds, 'Note added successfully', 'success'),
+        () => toastUpdate(toastIds, 'Note added successfully', 'success'),
       )
     })
     .catch((err) => {
@@ -63,7 +61,7 @@ const AllNotes = () => {
     deleteNote(id)
     .then((res) => {
       console.log(res);
-      renderNote(toastUpdate(toastId, 'Note deleted successfully', 'success'))
+      renderNote(() => toastUpdate(toastId, 'Note deleted successfully', 'success'))
     })
     .catch((err) => console.log(err))
   }
@@ -80,7 +78,7 @@ const AllNotes = () => {
     moveNote(id, updatedNote)
     .then((res) => {
       console.log(res);
-      renderNote(toastUpdate(toastId, message, 'success'))
+      renderNote(() => toastUpdate(toastId, message, 'success'))
     })
     .catch((err) => console.log(err))
 
