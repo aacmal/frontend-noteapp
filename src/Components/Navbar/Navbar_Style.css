@@ -8,8 +8,9 @@ nav{
     align-items: center;
 }
 
-a{
+nav a{
     text-decoration: none;
+    color: white;
 }
 
 .auth{

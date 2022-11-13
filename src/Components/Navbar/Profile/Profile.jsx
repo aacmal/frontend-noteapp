@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import { UserContext } from '../../../context/UserContext.jsx';
 import { logout } from '../../../utils/user.js';
 import { Chevron } from '../../dls/Icon/Icon.jsx';
@@ -19,6 +20,7 @@ const Profile = () => {
         logout()
         .then((res) => {
             setUser(null);
+            toast('Logged out successfully')
             console.log(res);
         })
         .catch((err) => console.log(err))

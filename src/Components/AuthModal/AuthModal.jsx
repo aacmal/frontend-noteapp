@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion/dist/framer-motion'
+import { motion } from 'framer-motion'
 import { UserContext } from '../../context/UserContext'
 
 import './AuthModal_style.css'

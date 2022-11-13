@@ -7,6 +7,7 @@ import { login } from '../../utils/user'
 import AuthModal from './AuthModal'
 import InputWithLabel from './InputWithLabel'
 import SubmitButton from './SubmitButton'
+import { ToastContainer, toast } from 'react-toastify'
 
 const LoginModal = () => {
   const emailRef = useRef()
@@ -28,6 +29,7 @@ const LoginModal = () => {
       console.log(res);
       setLoading(false)
       setUser(res.data)
+      toast('Logged in successfully')
       setTimeout(() => {
         navigate('/');
       }, 1000)

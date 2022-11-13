@@ -2,6 +2,7 @@ import axios from 'axios'
 import classNames from 'classnames'
 import React, { useContext, useRef, useState } from 'react'
 import { Link, redirect, useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { UserContext } from '../../context/UserContext.jsx'
 import { BASE_URL } from '../../utils/api'
 import { register } from '../../utils/user'
@@ -33,6 +34,7 @@ const RegisterModal = () => {
       console.log(res);
       setLoading(false)
       setUser(res.data.data)
+      toast('Registered successfully')
       setTimeout(() => {
         navigate('/');
       }, 1000)
