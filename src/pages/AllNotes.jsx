@@ -1,11 +1,9 @@
-import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import NoteInput from '../Components/NoteInput/NoteInput';
 import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import { UserContext } from '../context/UserContext';
-import { BASE_URL } from '../utils/api';
 import { addNewNote, deleteNote, getAllNotes, moveNote } from '../utils/note';
 
 const AllNotes = () => {
@@ -15,15 +13,20 @@ const AllNotes = () => {
   const {user} = useContext(UserContext);
 
   useEffect(() => {
-    renderNote()
+    if(user){
+      renderNote(toast('Note Updated', {autoClose: 800}))
+    }
   }, [user])
   
-  function renderNote(){
+  function renderNote(callback){
     getAllNotes()
     .then((res) => {
       console.log(res);
       setNotes(res.data)
       setLoading(false)
+      if(typeof callback === 'function'){
+        callback();
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -31,45 +34,53 @@ const AllNotes = () => {
     })
   }
 
+  function toastUpdate(id, message, type){
+    toast.update(id, {
+      autoClose: 3500,
+      render: message,
+      type: type,
+      isLoading: false,
+    })
+  }
+
   function handleAddNote(data){
+    const toastIds = toast.loading('Adding note...');
     addNewNote(data)
-    .then((res) => {
+    .then(async (res) => {
       console.log(res);
-      renderNote()
-      toast('Note added successfully')
+      renderNote(
+        toastUpdate(toastIds, 'Note added successfully', 'success'),
+      )
     })
     .catch((err) => {
       console.log(err);
+      toastUpdate(toastIds, 'Failed to add note', 'error')
     })
   }
 
   function handleDelete(id){
+    const toastId = toast.loading('Deleting note...');
     deleteNote(id)
     .then((res) => {
       console.log(res);
-      renderNote()
-      toast('Note deleted successfully')
+      renderNote(toastUpdate(toastId, 'Note deleted successfully', 'success'))
     })
     .catch((err) => console.log(err))
   }
 
   function handleArchive(id){
-    const index = notes.findIndex(note => note._id == id)
+    const toastId = toast.loading('Archiving note...');
+    const index = notes.findIndex(note => note._id === id)
     const updatedNote = {
       ...notes[index],
       isArchived: !notes[index].isArchived
     }
-    console.log(index);
 
+    const message = updatedNote.isArchived ? 'Note archived successfully' : 'Note unarchived successfully'
     moveNote(id, updatedNote)
     .then((res) => {
       console.log(res);
-      renderNote()
-      if(updatedNote.isArchived){
-        toast('Note archived successfully')
-      } else {
-        toast('Note unarchived successfully')
-      }
+      renderNote(toastUpdate(toastId, message, 'success'))
     })
     .catch((err) => console.log(err))
 
