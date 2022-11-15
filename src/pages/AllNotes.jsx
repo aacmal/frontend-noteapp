@@ -67,13 +67,13 @@ const AllNotes = () => {
   }
 
   function handleArchive(id){
-    const toastId = toast.loading('Archiving note...');
     const index = notes.findIndex(note => note._id === id)
     const updatedNote = {
       ...notes[index],
       isArchived: !notes[index].isArchived
     }
-
+    
+    const toastId = toast.loading(updatedNote.isArchived ? 'Archiving note...' : 'Unarchiving note...');
     const message = updatedNote.isArchived ? 'Note archived successfully' : 'Note unarchived successfully'
     moveNote(id, updatedNote)
     .then((res) => {
