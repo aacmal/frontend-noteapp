@@ -34,16 +34,99 @@ hr{
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-}
-
-.section-header h1{
     color: #9f9f9f;
+
 }
 
 .auth-description{
     text-align: center;
     opacity: 0.8;
 }
+
+.AlertDialogOverlay {
+    background-color: rgba(22, 22, 22, 0.477);
+    position: fixed;
+    inset: 0;
+    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+  
+.AlertDialogContent {
+    background-color: rgb(96, 96, 96);
+    border-radius: 6px;
+    box-shadow: rgba(238, 238, 238, 0.162) 0px 10px 38px -10px, rgba(143, 147, 150, 0.088) 0px 10px 20px -15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 500px;
+    max-height: 85vh;
+    padding: 25px;
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.AlertDialogContent:focus {
+    outline: none;
+}
+  
+.AlertDialogTitle {
+    margin: 0;
+    color: white;
+    font-size: 17px;
+    font-weight: bolder;
+}
+  
+.AlertDialogDescription {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: rgb(214, 214, 214);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.AlertButton{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.AlertButton .AlertDialogCancel, .AlertDialogAction{
+    all: unset;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bolder;
+}
+
+.AlertDialogCancel{
+    color: white !important;
+}
+.AlertDialogAction{
+    color: rgb(255, 70, 70);
+    background-color: rgba(248, 0, 0, 0.128);
+    border: 1px solid rgb(255, 70, 70);
+}
+
+  
+@keyframes overlayShow {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+  
+@keyframes contentShow {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+}
+  
 
 @media screen and (max-width: 600px) {
     .container{

@@ -12,6 +12,7 @@
     font-size: 1rem;
     box-shadow: 0 0 0 0 #fff;
     transition: box-shadow .2s;
+    color: #fff;
 }
 
 .search-input:focus{

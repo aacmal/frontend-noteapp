@@ -5,11 +5,13 @@ import NoteLists from '../Components/NoteLists/NoteLists';
 import SearchInput from '../Components/SearchInput/SearchInput';
 import { UserContext } from '../context/UserContext';
 import { addNewNote, deleteNote, getAllNotes, moveNote } from '../utils/note';
+import * as AlertDialog from '@radix-ui/react-alert-dialog';
 
 const AllNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true)
   const [keyword, setKeyword] = useState('')
+  const [deleteId, setDeleteId] = useState(null);
   const {user} = useContext(UserContext);
 
   useEffect(() => {
@@ -57,13 +59,17 @@ const AllNotes = () => {
   }
 
   function handleDelete(id){
-    const toastId = toast.loading('Deleting note...');
-    deleteNote(id)
-    .then((res) => {
-      console.log(res);
-      renderNote(() => toastUpdate(toastId, 'Note deleted successfully', 'success'))
-    })
-    .catch((err) => console.log(err))
+    if(deleteId){
+      const toastId = toast.loading('Deleting note...');
+      deleteNote(id)
+      .then((res) => {
+        console.log(res);
+        renderNote(() => toastUpdate(toastId, 'Note deleted successfully', 'success'))
+      })
+      .catch((err) => console.log(err))
+    } else {
+      alert('Please click delete button again to confirm')
+    }
   }
 
   function handleArchive(id){
@@ -93,28 +99,43 @@ const AllNotes = () => {
     <main className='container'>
       <NoteInput addNote={handleAddNote}/>
       <SearchInput onChange={(e) => setKeyword(e.target.value)}/>
-    {
-      loading
-        ? <h1>Loading ...</h1>
-        : user
-          ? (
-            <> 
-              <NoteLists 
-                noteLists={notArchived}
-                onDelete={handleDelete}
-                setArchive={handleArchive}
-              />
-              <hr />
-              <NoteLists
-                isArchive={true} 
-                noteLists={archived}
-                onDelete={handleDelete}
-                setArchive={handleArchive}
-              />
-            </>
-          )
-          : <h2 className='auth-description'>Please Login or create new account</h2> 
-      }
+      <AlertDialog.Root>
+      {
+        loading
+          ? <h1>Loading ...</h1>
+          : user
+            ? (
+              <> 
+                <NoteLists 
+                  noteLists={notArchived}
+                  onDelete={(noteId) => setDeleteId(noteId)}
+                  setArchive={handleArchive}
+                />
+                <hr />
+                <NoteLists
+                  isArchive={true} 
+                  noteLists={archived}
+                  onDelete={(noteId) => setDeleteId(noteId)}
+                  setArchive={handleArchive}
+                />
+              </>
+            )
+            : <h2 className='auth-description'>Please Login or create new account</h2> 
+        }
+        <AlertDialog.Portal>
+          <AlertDialog.Overlay className='AlertDialogOverlay'/>
+          <AlertDialog.Content className='AlertDialogContent'>
+            <AlertDialog.Title className='AlertDialogTitle'>Are you sure?</AlertDialog.Title>
+            <AlertDialog.Description className='AlertDialogDescription'>
+              This action cannot be undone, This will permanently delete your note
+            </AlertDialog.Description>
+            <div className='AlertButton'>
+              <AlertDialog.Cancel className='AlertDialogCancel'>Cancel</AlertDialog.Cancel>
+              <AlertDialog.Action onClick={() => handleDelete(deleteId)} className='AlertDialogAction'>Delete</AlertDialog.Action>
+            </div>
+          </AlertDialog.Content>
+        </AlertDialog.Portal>
+      </AlertDialog.Root>
     </main>
   )
 }

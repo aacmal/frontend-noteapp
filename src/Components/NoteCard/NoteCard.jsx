@@ -2,6 +2,7 @@ import React from 'react'
 import { showFormattedDate } from '../../utils'
 import ArchiveButton from './ArchiveButton'
 import DeleteButton from './DeleteButton'
+import * as AlertDialog from '@radix-ui/react-alert-dialog'
 
 import './NoteCard_Style.css'
 
@@ -14,7 +15,9 @@ const NoteCard = ({id, title, body, createdAt, onDelete, archived, setArchive}) 
       <p className='note-card-body'>{body}</p>
       <div className='action'>
         <ArchiveButton onClick={() => setArchive(id)} archived={archived}/>
-        <DeleteButton  onClick={() => onDelete(id)}/>
+        <AlertDialog.Trigger asChild>
+            <DeleteButton onClick={() => onDelete(id)}/>
+        </AlertDialog.Trigger>
       </div>
     </section>
   )

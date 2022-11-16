@@ -1,12 +1,15 @@
 .note-card{
+    position: relative;
+    padding: 25px;
+    padding-bottom: 60px;
     background: #353438;
-    padding: 30px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     border: 1px solid transparent;
     transition: border .3s;
+    overflow: hidden;
 }
 
 .note-card:hover{
@@ -28,10 +31,21 @@
 }
 
 .action{
+    position: absolute;
     display: flex;
     gap: 10px;
     align-self: flex-end;
     margin-top: auto;
+    bottom: 10px;
+    right: 15px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.note-card:hover .action{
+    visibility: visible;
+    opacity: 1;
 }
 
 .button-action{
@@ -48,5 +62,13 @@
 
 .button-action:hover{
     background-color: #67696d;
+}
+
+@media screen and (max-width: 600px) {
+    .action{
+        visibility: visible;
+        opacity: 1;
+        transition: none;
+    }
 }
 
