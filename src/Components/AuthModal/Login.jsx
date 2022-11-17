@@ -8,6 +8,7 @@ import AuthModal from './AuthModal'
 import InputWithLabel from './InputWithLabel'
 import SubmitButton from './SubmitButton'
 import { ToastContainer, toast } from 'react-toastify'
+import PasswordInput from './PasswordInput'
 
 const LoginModal = () => {
   const emailRef = useRef()
@@ -52,11 +53,12 @@ const LoginModal = () => {
           inputRef={emailRef}
           
         />
-        <InputWithLabel
+        {/* <InputWithLabel
           type='password'
           label='Password'
           inputRef={passwordRef}
-        />
+        /> */}
+        <PasswordInput passwordRef={passwordRef} />
         <SubmitButton
           loading={loading}
           label='Login'
