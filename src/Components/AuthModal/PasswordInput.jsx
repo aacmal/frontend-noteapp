@@ -3,7 +3,7 @@ import EyeIcon from '../Icons/Eye'
 import InputWithLabel from './InputWithLabel'
 
 const PasswordInput = ({passwordRef}) => {
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
   return (
     <div className='password-input'>
         <InputWithLabel
