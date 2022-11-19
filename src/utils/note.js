@@ -19,3 +19,8 @@ export const moveNote = async (id, data) => {
     const res = await instance.put(`/note/${id}`, data)
     return res
 }
+
+export const getNoteById = async (id) => {
+    const res = await instance.get(`/note/${id}`)
+    return res
+}

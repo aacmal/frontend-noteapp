@@ -4,12 +4,16 @@
     padding-bottom: 60px;
     background: #353438;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     border: 1px solid transparent;
     transition: border .3s;
     overflow: hidden;
+}
+
+.note-card a{
+    all: unset;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .note-card:hover{

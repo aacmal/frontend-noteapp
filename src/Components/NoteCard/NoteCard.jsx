@@ -5,14 +5,17 @@ import DeleteButton from './DeleteButton'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 
 import './NoteCard_Style.css'
+import { Link } from 'react-router-dom'
 
 const NoteCard = ({id, title, body, createdAt, onDelete, archived, setArchive}) => {
   const formatedDate = showFormattedDate(createdAt)
   return (
     <section className='note-card'>
-      <h1 className='note-card-heading'>{title}</h1>
-      <p className='note-card-date'>{formatedDate}</p>
-      <p className='note-card-body'>{body}</p>
+      <Link to={`/${id}`}>
+        <h1 className='note-card-heading'>{title}</h1>
+        <p className='note-card-date'>{formatedDate}</p>
+        <p className='note-card-body'>{body}</p>
+      </Link>
       <div className='action'>
         <ArchiveButton onClick={() => setArchive(id)} archived={archived}/>
         <AlertDialog.Trigger asChild>

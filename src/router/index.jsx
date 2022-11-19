@@ -5,6 +5,7 @@ import {AnimatePresence} from 'framer-motion'
 import LoginModal from '../Components/AuthModal/Login'
 import RegisterModal from '../Components/AuthModal/Register'
 import AllNotes from '../pages/AllNotes.jsx'
+import SingleNote from '../pages/SingleNote'
 
 const MainRouter = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const MainRouter = () => {
               <Route path='login' element={<LoginModal/>}/>
               <Route path='register' element={<RegisterModal/>}/>
           </Route>
+          <Route path='/:noteId' element={<SingleNote/>}/>
         </Routes> 
       <AnimatePresence>
           {
