@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter, useLocation, Route, Routes } from 'react-router-dom'
-import Navbar from '../Components/Navbar/Navbar'
+import React from 'react'
+import { useLocation, Route, Routes } from 'react-router-dom'
 import {AnimatePresence} from 'framer-motion'
 import LoginModal from '../Components/AuthModal/Login'
 import RegisterModal from '../Components/AuthModal/Register'
