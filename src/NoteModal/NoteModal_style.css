@@ -1,0 +1,17 @@
+.note-modal{
+    padding: 20px;
+    width: 80vw;
+    max-width: 900px;
+}
+
+.note-divider{
+    margin: 20px 0 50px 0;
+    border: 1px solid rgb(205, 205, 205);
+}
+
+/* Create responsive note-modal padding for mobile */
+@media screen and (max-width: 600px){
+    .note-modal{
+        padding: 0px;
+    }
+}

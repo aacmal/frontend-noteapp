@@ -17,8 +17,8 @@ const MainRouter = () => {
           <Route path='/' element={<AllNotes/>}>
               <Route path='login' element={<LoginModal/>}/>
               <Route path='register' element={<RegisterModal/>}/>
+              <Route path='/:noteId' element={<SingleNote/>}/>
           </Route>
-          <Route path='/:noteId' element={<SingleNote/>}/>
         </Routes> 
       <AnimatePresence>
           {
@@ -26,6 +26,7 @@ const MainRouter = () => {
               <Routes>
                 <Route path='login' element={<LoginModal/>}/>
                 <Route path='register' element={<RegisterModal/>}/>
+                <Route path='/:noteId' element={<SingleNote/>}/>
               </Routes>
             )
           }

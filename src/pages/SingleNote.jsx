@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import NoteModal from '../NoteModal/NoteModal';
 import { getNoteById } from '../utils/note'
 
-import './SingleNote_style.css'
 
 const SingleNote = () => {
     const { noteId } = useParams();
@@ -26,11 +26,7 @@ const SingleNote = () => {
     }
 
     return (
-        <div className='single-note container'>
-            <h1 className='title'>{note?.title}</h1>
-            <hr />
-            <p className='body'>{note?.body}</p>
-        </div>
+        <NoteModal note={note}/>
     )
 }
 
