@@ -6,9 +6,10 @@ import SearchInput from '../Components/SearchInput/SearchInput';
 import { UserContext } from '../context/UserContext';
 import { addNewNote, deleteNote, getAllNotes, moveNote } from '../utils/note';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
+import { NoteContext } from '../context/NoteContext';
 
 const AllNotes = () => {
-  const [notes, setNotes] = useState([]);
+  const { notes, setNotes } = useContext(NoteContext);
   const [loading, setLoading] = useState(true)
   const [keyword, setKeyword] = useState('')
   const [deleteId, setDeleteId] = useState(null);

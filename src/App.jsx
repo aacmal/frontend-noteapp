@@ -8,6 +8,7 @@ import UserContextProvider from './context/UserContext.jsx'
 
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
+import NoteContextProvider from './context/NoteContext'
 
 
 const App = () => {
@@ -26,7 +27,9 @@ const App = () => {
       <BrowserRouter>
         <UserContextProvider>
           <Navbar/>
-          <MainRouter/>
+          <NoteContextProvider>
+            <MainRouter/>
+          </NoteContextProvider>
         </UserContextProvider>
       </BrowserRouter>
     </>
