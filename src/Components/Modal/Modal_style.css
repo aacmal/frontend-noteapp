@@ -4,8 +4,15 @@
     width: 100vw;
     height: 100vh;
     display: grid;
-    place-items: center;
     color: white;
+}
+
+.modal-wrapper.position-center{
+    place-items: center;
+}
+
+.modal-wrapper.position-top{
+    place-items: center;
 }
 
 .background.trigger{
@@ -18,9 +25,12 @@
     /* backdrop-filter: blur(2px); */
 }
 
+.modal-wrapper.modal-wrapper.position-top .modal-content{
+    margin-top: -100px;
+}
+
 .modal-content{
     z-index: 20;
-    padding: 30px;
     border-radius: 10px;
     background-color: rgb(96, 96, 96);
     width: 100%;

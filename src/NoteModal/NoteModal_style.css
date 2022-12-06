@@ -1,7 +1,8 @@
 .note-modal{
-    padding: 20px;
-    width: 80vw;
+    padding: 30px;
+    width: 90vw;
     max-width: 900px;
+    min-height: 400px;
 }
 
 .note-divider{
@@ -9,9 +10,24 @@
     border: 1px solid rgb(205, 205, 205);
 }
 
+
+.note-modal .title{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    display: block;
+}
+
+.heading-note{
+    margin-bottom: 10px;
+}
+
+.heading-note .date{
+    opacity: 0.8;
+}
+
 /* Create responsive note-modal padding for mobile */
 @media screen and (max-width: 600px){
     .note-modal{
-        padding: 0px;
+        padding: 20px;
     }
 }

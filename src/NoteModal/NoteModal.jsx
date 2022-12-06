@@ -1,16 +1,21 @@
 import React from 'react'
 import Modal from '../Components/Modal/Modal'
+import { showFormattedDate } from '../utils'
 
 import './NoteModal_style.css'
 
 const NoteModal = ({ note }) => {
+  const formatedDate = showFormattedDate(note?.createdAt)
+
   return (
-    <Modal>
-        <div className='note-modal'>
-            <h1 className='titles'>{note?.title}</h1>
-            <hr className='note-divider'/>
-            <p className='body'>{note?.body}</p>
+    <Modal position='top'>
+      <div className='note-modal'>
+        <div className='heading-note'>
+          <h1 className='title'>{note?.title}</h1>
+          <p className='date'>{formatedDate}</p>
         </div>
+        <p className='body'>{note?.body}</p>
+      </div>
     </Modal>
   )
 }

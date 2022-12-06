@@ -3,12 +3,19 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 import './Modal_style.css'
+import classNames from 'classnames'
 
-const Modal = ({ children }) => {
+const Modal = ({ children, position='center' }) => {
     const navigate = useNavigate()
 
     return (
-        <div className='modal-wrapper'>
+        <div className={
+          classNames(
+            'modal-wrapper', 
+            {"position-top": (position==='top')},
+            {"position-center": (position==='center')},
+          )
+        }>
           <motion.div 
             className='trigger background' 
             onClick={() => navigate('/')}
