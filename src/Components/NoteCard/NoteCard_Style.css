@@ -32,6 +32,7 @@
 
 .note-card .note-card-body{
     color: #DFE2EA;
+    white-space: pre-wrap;
 }
 
 .action{
