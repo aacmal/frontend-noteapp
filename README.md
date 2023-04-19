@@ -1,3 +1,13 @@
+# About
+a simple note web application made with ReactJS and native css, and the backend is made with nodeJS
+<p align="center">
+  <a href="https://notes.acmal.me">
+    <img src="public/noteapp.jpg" alt="Logo"  style="border-radius: 10px">
+  </a>
+</p>
+
+
+<hr>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
