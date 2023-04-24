@@ -54,25 +54,25 @@ const NoteInput = ({ addNote }) => {
                     value={state.title} 
                     onChange={onTitleChange}
                     maxLength={60} 
-                    placeholder='Judul' 
+                    placeholder='Title' 
                     type="text" 
                     className='note-input-title'
                     minLength={5}
                     required={true}
                 />
-                <span className='counter'>Tersisa {state.maxTitle-1} Karakter</span>
+                <span className='counter'>Remaining {state.maxTitle-1} characters</span>
             </div>
             <textarea 
                 minLength={7}
                 ref={inputBodyRef}
                 // value={state.body} 
                 // onChange={onBodyChange}
-                placeholder='Tuliskan catatannya disini' 
+                placeholder='Write a note here' 
                 type="text" 
                 className='note-input-body'
                 required={true}
             />
-            <button className='note-input-submit' type="submit">Tambahkan</button>
+            <button className='note-input-submit' type="submit">Add</button>
         </form>
     )
 }

@@ -29,7 +29,7 @@ const getInitialData = () => ([
       month: "long",
       day: "numeric"
     }
-    return new Date(date).toLocaleDateString("id-ID", options)
+    return new Date(date).toLocaleDateString("en-US", options)
   }
   
   export { getInitialData, showFormattedDate };

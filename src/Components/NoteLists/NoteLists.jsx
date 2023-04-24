@@ -25,7 +25,7 @@ const NoteLists = ({ noteLists, onDelete, isArchive, setArchive }) => {
                             setArchive={setArchive}
                         />
                     ))
-                    : <p className='not-found'>Tidak ditemukan</p>
+                    : <p className='not-found'>Empty</p>
                 }
             </div>
         </section>

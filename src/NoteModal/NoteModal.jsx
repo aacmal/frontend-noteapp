@@ -46,7 +46,7 @@ const NoteModal = ({ note }) => {
             </div>
             <textarea ref={bodyRef} name="" id="" cols="30" rows="10" defaultValue={note?.body} spellCheck={false}></textarea>
           </div>
-          <button type='submit' className='save-button'>Simpan</button>
+          <button type='submit' className='save-button'>Save</button>
         </div>  
       </form>
     </Modal>
