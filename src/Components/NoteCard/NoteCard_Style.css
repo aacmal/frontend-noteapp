@@ -10,7 +10,13 @@
 }
 
 .note-card a{
+    overflow: hidden;
+    box-shadow: -1px -10px 14px -5px hsl(255, 4%, 21%) inset;
+    -webkit-box-shadow: -1px -10px 14px -5px hsl(255, 4%, 21%) inset;
+    -moz-box-shadow: -1px -10px 14px -5px hsl(255, 4%, 21%) inset;
     all: unset;
+    height: 150px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;

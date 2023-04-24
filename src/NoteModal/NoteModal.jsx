@@ -6,6 +6,7 @@ import Modal from '../Components/Modal/Modal'
 import { NoteContext } from '../context/NoteContext'
 import { showFormattedDate } from '../utils'
 import { getAllNotes, updateNote } from '../utils/note'
+import { toast } from 'react-toastify'
 
 import './NoteModal_style.css'
 
@@ -18,6 +19,8 @@ const NoteModal = ({ note }) => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    if(!titleRef.current.value || !bodyRef.current.value) return toast.error('Title and body must be filled')
+    if(titleRef.current.value.length > 60) return toast.error('Title must be less than 60 characters')
     const data = {
       title: titleRef.current.value,
       body: bodyRef.current.value

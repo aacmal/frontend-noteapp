@@ -5,6 +5,7 @@
     height: 100vh;
     display: grid;
     color: white;
+    position: fixed;
 }
 
 .modal-wrapper.position-center{
